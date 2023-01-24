@@ -43,6 +43,12 @@ const errors = ref(null)
 const loading = ref(false)
 
 const handleLogin = async () => {
+  if (!user.username && !user.password) {
+    toast.error('پر کردن تمامی فیلد ها الزامی است', {
+      timeout: 2000,
+    })
+    return
+  }
   loading.value = true
   try {
     const { token } = await auth.loginUser(user)

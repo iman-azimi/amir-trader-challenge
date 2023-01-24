@@ -55,7 +55,14 @@ const loading = ref(false)
 const showVerify = ref(false)
 const code = ref()
 const handleRegister = async () => {
+  if (!user.username && !user.password && !user.mobile) {
+    toast.error('پر کردن تمامی فیلد ها الزامی است', {
+      timeout: 2000,
+    })
+    return
+  }
   loading.value = true
+
   try {
     await auth.registerUser(user)
     showVerify.value = true
